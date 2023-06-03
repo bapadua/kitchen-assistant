@@ -1,13 +1,18 @@
 Feature: the ingredient should be maintained
-  Scenario: ingredient is valid
-    Given the repository receive a valid ingredient
-    When the ingredient should be persisted
-    Then the ingredient should be found on database
 
-  Scenario: look for existing ingredient by name
-    When the user look up for the ingredient 'Tapioca'
-    Then the ingredient is found
+  Scenario: ingredient is created
+    Given the user tries to save the following ingredient
+      | id   | name    | description      |
+      | null | Tapioca | Tapioca da terra |
+    When the user calls /ingredient post
+    Then the ingredient is returned
+      | id   | name    | description      |
+      | null | Tapioca | Tapioca da terra |
 
-  Scenario: look for non existing ingredient by name
-    When the user look up for the ingredient 'Pasta de dentes'
-    Then the ingredient is not found
+
+  Scenario: the user search by name
+    Given the user look up for the ingredient
+    When the user calls /ingredient get with path 'Tapioca'
+    Then the ingredient is returned
+      | id   | name    | description      |
+      | null | Tapioca | Tapioca da terra |

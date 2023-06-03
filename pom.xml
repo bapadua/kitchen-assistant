@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.bapadua</groupId>
@@ -8,8 +8,76 @@
     <version>0.1.0</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <java.version>17</java.version>
+        <spotbugs-annotations.version>4.6.0</spotbugs-annotations.version>
+        <docker.hub>bapadua</docker.hub>
+        <test-containers.version>1.18.3</test-containers.version>
+    </properties>
+
     <modules>
         <module>fooder-core</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <version>${spotbugs-annotations.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>${test-containers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${test-containers.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <image.name>${docker.hub}/${project.artifactId}:latest</image.name>
+            </properties>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-maven-plugin</artifactId>
+                            <version>2.5.9</version>
+                            <configuration>
+                                <imageName>${image.name}</imageName>
+                                <image>
+                                    <env>
+                                        <BP_JVM_VERSION>17.*</BP_JVM_VERSION>
+                                    </env>
+                                </image>
+                                <layers>
+                                    <enabled>true</enabled>
+                                </layers>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>build-image</goal>
+                                    </goals>
+                                    <phase>package</phase>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

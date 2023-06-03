@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/kitchen_core?createDatabaseIfNotExist=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&enabledTLSProtocols=TLSv1,TLSv1.1,TLSv1.2}
+    username: ${MYSQL_USR:docker}
+    password: ${MYSQL_PWD:root}
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+flyway:
+  user: ${MYSQL_USR:docker}
+  password: ${MYSQL_PWD:root}
+  schemas: ingredient-db
