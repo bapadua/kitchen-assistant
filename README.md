@@ -1,3 +1,7 @@
+## Stack
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=bapadua_kitchen-assistant)
+## Status
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=bapadua_kitchen-assistant&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=bapadua_kitchen-assistant)
 ## Índice
 * [Introdução](https://github.com/bapadua/kitchen-assistant/edit/main/README.md#kitchen-assistant)
 * [Diagrama de Classe](https://github.com/bapadua/kitchen-assistant/edit/main/README.md#diagrama-de-classes-10) 
