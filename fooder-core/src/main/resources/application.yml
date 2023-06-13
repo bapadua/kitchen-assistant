@@ -1,0 +1,9 @@
+server:
+  port:
+    8088
+
+info:
+  app:
+    name: '@project.artifactId@'
+    description: '@project.description@'
+    version: '@project.version@'
