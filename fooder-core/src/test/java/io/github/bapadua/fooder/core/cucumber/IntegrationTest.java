@@ -14,7 +14,6 @@ import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-
 @WebAppConfiguration
 @ContextConfiguration(classes = FooderCoreApplication.class)
 public class IntegrationTest<T> {
@@ -28,12 +27,8 @@ public class IntegrationTest<T> {
 
     @Test
     @DisplayName("http client load")
-    public void context() {
-        assertThat(client).isNotNull();
-    }
-
-    public <T> T convert(Map<String, String> map, Class<T> clazz) {
-        return mapper.convertValue(map, clazz);
+    void context() {
+        assertThat(mapper).isNotNull();
     }
 
 }
