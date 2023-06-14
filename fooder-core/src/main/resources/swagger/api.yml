@@ -1,0 +1,7 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Ingredient Api
+  description: Api para controle de ingredientes
+servers:
+  - url: http://localhost:8088

@@ -2,16 +2,17 @@ package io.github.bapadua.fooder.core.mapper;
 
 import io.github.bapadua.fooder.core.dto.IngredientDTO;
 import io.github.bapadua.fooder.core.entity.Ingredient;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mapstruct.factory.Mappers;
 
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class IngredientMapperTest {
-    IngredientMapper mapper = IngredientMapper.INSTANCE;
+
+    IngredientMapper mapper = Mappers.getMapper(IngredientMapper.class);
 
     @Test
     @DisplayName("load mapper")
@@ -29,7 +30,7 @@ class IngredientMapperTest {
 
         Ingredient entity = mapper.toEntity(dto);
 
-        assertThat(empty).isNull();;
+        assertThat(empty).isNull();
         assertThat(entity.getName()).isEqualTo(expectedName);
         assertThat(entity.getDescription()).isEqualTo(expectedDescription);
     }
