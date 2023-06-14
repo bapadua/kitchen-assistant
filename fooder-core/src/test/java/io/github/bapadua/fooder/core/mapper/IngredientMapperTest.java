@@ -22,12 +22,14 @@ class IngredientMapperTest {
     @Test
     @DisplayName("map to ingredient entity")
     void mapToEntity() {
+        Ingredient empty = mapper.toEntity(null);
         String expectedName = "Massa Panquecas";
         String expectedDescription = "Massa australiana";
         IngredientDTO dto = new IngredientDTO(null, expectedName, expectedDescription);
 
         Ingredient entity = mapper.toEntity(dto);
 
+        assertThat(empty).isNull();;
         assertThat(entity.getName()).isEqualTo(expectedName);
         assertThat(entity.getDescription()).isEqualTo(expectedDescription);
     }
@@ -35,12 +37,14 @@ class IngredientMapperTest {
     @Test
     @DisplayName("map to ingredient dto")
     void mapToDto() {
+        IngredientDTO empty = mapper.toDto(null);
         String expectedName = "Massa Panquecas";
         String expectedDescription = "Massa australiana";
         Ingredient ingredient = new Ingredient(UUID.randomUUID(), expectedName, expectedDescription);
 
         IngredientDTO dto = mapper.toDto(ingredient);
 
+        assertThat(empty).isNull();
         assertThat(dto.name()).isEqualTo(expectedName);
         assertThat(dto.description()).isEqualTo(expectedDescription);
     }
